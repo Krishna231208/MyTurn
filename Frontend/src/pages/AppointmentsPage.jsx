@@ -1,6 +1,6 @@
 // import React, 'react';
 import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 
 const AppointmentsPage = () => {
@@ -15,7 +15,7 @@ const AppointmentsPage = () => {
                 navigate('/login');
                 return;
             }
-            const res = await axios.get('/api/doctors/get-user-appointments', {
+            const res = await api.get('/api/doctors/get-user-appointments', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (res.data.success) {
@@ -37,7 +37,7 @@ const AppointmentsPage = () => {
             try {
                 const token = localStorage.getItem('token');
                 // THE FIX: Add the '/api/doctors' prefix to the URL
-                const res = await axios.put(
+                const res = await api.put(
                     `/api/doctors/my-appointments/${appointmentId}/cancel`, 
                     {},
                     { headers: { Authorization: `Bearer ${token}` } }

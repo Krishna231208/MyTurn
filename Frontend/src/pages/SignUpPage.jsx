@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 
 const SignUpPage = () => {
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const SignUpPage = () => {
     e.preventDefault();
     try {
         // Use a relative path so the proxy can catch it
-        const res = await axios.post('/api/users/register', { name, email, password });
+        const res = await api.post('/api/users/register', { name, email, password });
         if (res.data.success) {
             alert('Registration Successful! Please log in.');
             navigate('/login');

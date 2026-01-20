@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { Link } from 'react-router-dom';
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ const LoginPage = () => {
    const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post('/api/users/login', { email, password });
+        const res = await api.post('/api/users/login', { email, password });
         if (res.data.success) {
             localStorage.setItem('token', res.data.token);
             // Store the user's role

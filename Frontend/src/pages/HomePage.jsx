@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api/axios";
 import DoctorCard from "../components/DoctorCard";
 
 const HomePage = () => {
@@ -21,7 +21,7 @@ const HomePage = () => {
   const getAllDoctors = async (search = "") => {
     try {
       // Append the search term as a query parameter to the API call
-      const res = await axios.get(
+      const res = await api.get(
         `/api/doctors/get-all-doctors?search=${search}`
       );
       if (res.data.success) {

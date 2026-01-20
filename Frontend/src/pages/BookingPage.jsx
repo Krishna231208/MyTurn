@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // 1. Import useNavigate
-import axios from 'axios';
+import api from '../api/axios';
 
 // 2. Accept the 'user' object as a prop here
 const BookingPage = ({ user }) => { 
@@ -23,7 +23,7 @@ const BookingPage = ({ user }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('/api/doctors/book-appointment', {
+            const res = await api.post('/api/doctors/book-appointment', {
                 doctorId: doctorId,
                 userId: user._id, // Use the ID from the user object
                 date: new Date().toISOString().split('T')[0], 

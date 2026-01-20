@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-
+import api from '../api/axios';
 const AddDoctorModal = ({ isOpen, onClose, refreshDoctors }) => {
     // --- Doctor Profile State ---
     const [name, setName] = useState('');
@@ -26,7 +25,7 @@ const [uploading, setUploading] = useState(false);
 
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.post('/api/upload', formData, {
+            const { data } = await api.post('/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`,
@@ -76,7 +75,7 @@ const [uploading, setUploading] = useState(false);
                 timings: timings.split(',').map(t => t.trim())
             };
             
-            await axios.post('/api/admin/create-doctor', doctorData, {
+            await api.post('/api/admin/create-doctor', doctorData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

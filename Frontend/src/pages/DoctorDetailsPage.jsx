@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 
 // --- Helper function to generate time slots ---
 const generateTimeSlots = (timings, durationInMinutes = 30) => {
@@ -50,7 +50,7 @@ const DoctorDetailsPage = ({ user }) => {
         const fetchDoctorDetails = async () => {
             if (doctorId) {
                 try {
-                    const { data } = await axios.get(`/api/doctors/${doctorId}`);
+                    const { data } = await api.get(`/api/doctors/${doctorId}`);
                     if (data.success) {
                         setDoctor(data.data);
                         // Generate slots from the doctor's available time ranges
@@ -78,7 +78,7 @@ const DoctorDetailsPage = ({ user }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('/api/doctors/book-appointment', {
+            const res = await api.post('/api/doctors/book-appointment', {
                 doctorId: doctorId,
                 userId: user._id, // Automatically use the logged-in user's ID
                 date: new Date().toISOString().split('T')[0], // Using today's date as an example

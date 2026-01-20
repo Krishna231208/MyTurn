@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import AddDoctorModal from '../components/AddDoctorModal'; // Import the modal
 
 const AdminDashboard = () => {
@@ -21,7 +21,7 @@ const AdminDashboard = () => {
         if (window.confirm('Are you sure you want to delete this doctor?')) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`/api/doctors/${id}`, {
+                await api.delete(`/api/doctors/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 alert('Doctor deleted successfully!');

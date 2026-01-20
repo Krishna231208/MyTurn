@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 
 const DoctorDashboard = () => {
@@ -19,8 +19,8 @@ const DoctorDashboard = () => {
             if (!token) { navigate('/login'); return; }
             
             const [apptRes, profileRes] = await Promise.all([
-                axios.get('/api/doctor-dashboard/appointments', { headers: { Authorization: `Bearer ${token}` } }),
-                axios.get('/api/doctor-dashboard/profile', { headers: { Authorization: `Bearer ${token}` } })
+                api.get('/api/doctor-dashboard/appointments', { headers: { Authorization: `Bearer ${token}` } }),
+                api.get('/api/doctor-dashboard/profile', { headers: { Authorization: `Bearer ${token}` } })
             ]);
 
             if (apptRes.data.success) setAppointments(apptRes.data.data);
@@ -44,7 +44,7 @@ const DoctorDashboard = () => {
     const handleStatusUpdate = async (id, status) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`/api/doctor-dashboard/appointments/${id}/status`, { status }, {
+            await api.put(`/api/doctor-dashboard/appointments/${id}/status`, { status }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             // 3. This call now works because fetchData is in the same scope
@@ -62,7 +62,7 @@ const DoctorDashboard = () => {
                 availability,
                 timings: timings.split(',').map(t => t.trim())
             };
-            await axios.put('/api/doctor-dashboard/profile', updatedProfile, {
+            await api.put('/api/doctor-dashboard/profile', updatedProfile, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert('Profile updated successfully!');
