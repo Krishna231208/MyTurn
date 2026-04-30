@@ -117,7 +117,7 @@ const HomePage = () => {
             </div>
           ) : (
             <p className="text-center text-gray-500">
-              No doctors available at the moment.
+             Loading....
             </p>
           )}
         </div>
