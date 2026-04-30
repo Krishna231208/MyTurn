@@ -7,8 +7,7 @@ const Navbar = ({ user }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
-    window.location.reload();
+    navigate("/login", {replace = true});
   };
 
   return (
@@ -75,13 +74,12 @@ const Navbar = ({ user }) => {
               )}
             </div>
           ) : (
-            navigate('/login')
-            // <Link
-            //   to="/login"
-            //   className="bg-yellow-400 px-5 py-2 rounded-md font-semibold"
-            // >
-            //   Login / SignUp
-            // </Link>
+            <Link
+              to="/login"
+              className="bg-yellow-400 px-5 py-2 rounded-md font-semibold"
+            >
+              Login / SignUp
+            </Link>
           )}
         </div>
       </nav>
