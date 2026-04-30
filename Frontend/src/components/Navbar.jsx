@@ -75,12 +75,13 @@ const Navbar = ({ user }) => {
               )}
             </div>
           ) : (
-            <Link
-              to="/login"
-              className="bg-yellow-400 px-5 py-2 rounded-md font-semibold"
-            >
-              Login / SignUp
-            </Link>
+            <navigate to="/login"/>
+            // <Link
+            //   to="/login"
+            //   className="bg-yellow-400 px-5 py-2 rounded-md font-semibold"
+            // >
+            //   Login / SignUp
+            // </Link>
           )}
         </div>
       </nav>
