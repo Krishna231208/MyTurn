@@ -75,7 +75,7 @@ const Navbar = ({ user }) => {
               )}
             </div>
           ) : (
-            <navigate to="/login"/>
+            navigate('/login')
             // <Link
             //   to="/login"
             //   className="bg-yellow-400 px-5 py-2 rounded-md font-semibold"
