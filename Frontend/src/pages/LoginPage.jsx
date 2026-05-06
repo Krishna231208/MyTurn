@@ -26,7 +26,6 @@ const LoginPage = () => {
             } else {
                 navigate('/');
             }
-            window.location.reload();
         } else {
             alert(res.data.message);
         }

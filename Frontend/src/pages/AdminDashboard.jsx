@@ -8,7 +8,7 @@ const AdminDashboard = () => {
 
     const getAllDoctors = async () => {
         try {
-            const { data } = await axios.get('/api/doctors/get-all-doctors');
+            const { data } = await api.get('/api/doctors/get-all-doctors');
             if (data.success) {
                 setDoctors(data.data);
             }
