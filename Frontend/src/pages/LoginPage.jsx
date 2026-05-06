@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { Link } from 'react-router-dom';
-const LoginPage = () => {
+const LoginPage = ({ setUser }) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,6 +16,14 @@ const LoginPage = () => {
             // Store the user's role
             localStorage.setItem('role', res.data.role); 
             
+            // Fetch user info for global state to update Navbar instantly
+            try {
+                const userRes = await api.get('/api/users/me');
+                if (setUser) setUser(userRes.data);
+            } catch (err) {
+                console.error('Failed to fetch user after login', err);
+            }
+
             alert('Login Successful!');
 
             // Redirect based on role
