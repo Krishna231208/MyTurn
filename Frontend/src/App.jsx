@@ -112,7 +112,7 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen bg-gray-50">
-        <Navbar user={user} />
+        <Navbar user={user} setUser={setUser} />
 
         <main className="flex-grow">
           <Routes>
